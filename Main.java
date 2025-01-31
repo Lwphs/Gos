@@ -45,13 +45,13 @@ public class Main {
 
     private static void menu(Dog yourDog) throws InterruptedException {
         do {
-            System.out.println("Stats!" + yourDog.toString());
             System.out.println("\nWhat do you want to do with " + yourDog.getName() + "!"
             + "\n 1. Go for a walk"
             + "\n 2. Pet the dog"
             + "\n 3. Feed the dog"
             + "\n 4. Take a nap with the dog"
-            + "\n 5. Sacrifice the dog for your cult");
+                    + "\n 5.- View dog stats"
+            + "\n 6. Sacrifice the dog for your cult");
 
             System.out.print("Select an option: ");
             option = INPUT.nextInt();
@@ -70,11 +70,14 @@ public class Main {
                     yourDog.sleep();
                     break;
                 case 5:
+                    System.out.println(yourDog);
+                    break;
+                case 6:
                     System.out.println("You sacrificed your dog as your leader told you."
                     + "\nGlory to the Scientology.");
                     INPUT.close();
                     break;
             }
-        } while (option != 5);
+        } while (option != 6);
     }
 }
