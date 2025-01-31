@@ -60,16 +60,21 @@ public class Dog {
         energy--;
     }
 
+    public void petTheDog() {
+        System.out.println("You pet your dog! " + name + "  is happy!");
+        happiness++;
+    }
+
     public void eat() {
         System.out.print("What will you give the dog to eat? ");
         String foodName = input.nextLine();
-        System.out.println(name + " is eating" + foodName + ", he probably enjoys the meal.");
+        System.out.println(name + " is eating " + foodName + ", it probably enjoys the meal.");
         hunger++;
         happiness++;
     }
 
-    public void sleep() {
-        int sleepTime = input.nextInt();
+    public void sleep() throws InterruptedException {
+        int sleepTime;
 
         System.out.print("How many hours do you want your dog to sleep? ");
         sleepTime = input.nextInt();
@@ -81,27 +86,30 @@ public class Dog {
             voice += sleepTime;
         }
 
+        System.out.print(name + " is profoundly sleeping");
         for (int i = 0; i <  sleepTime; i++) {
-            System.out.println(name + " is profoundly sleeping...");
+            System.out.print(".");
+            Thread.sleep(1000);
         }
 
     }
 
     public void walkTheDog() {
+
         System.out.println("You walked the dog.");
+        energy -= 2;
+        happiness++;
     }
 
     @Override
     public String toString() {
-        return "Dog{" +
-                "name='" + name + '\'' +
-                ", breed='" + breed + '\'' +
-                ", age=" + age +
-                ", weight=" + weight +
-                ", energy=" + energy +
-                ", hunger=" + hunger +
-                ", voice=" + voice +
-                ", happiness=" + happiness +
-                '}';
+        return "name: " + name + '\'' +
+                ", breed: " + breed + '\'' +
+                ", age: " + age +
+                ", weight: " + weight +
+                ", energy: " + energy +
+                ", hunger: " + hunger +
+                ", voice: " + voice +
+                ", happiness: " + happiness;
     }
 }
