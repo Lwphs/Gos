@@ -29,6 +29,13 @@ public class Dog {
         this.happiness = MAX_HAPPINESS / 2;
     }
 
+    public Dog() {
+        this.energy = MAX_ENERGY;
+        this.hunger = 0;
+        this.voice = MAX_VOICE;
+        this.happiness = MAX_HAPPINESS / 2;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -89,9 +96,10 @@ public class Dog {
                 ", breed='" + breed + '\'' +
                 ", age=" + age +
                 ", weight=" + weight +
+                ", energy=" + energy +
+                ", hunger=" + hunger +
+                ", voice=" + voice +
+                ", happiness=" + happiness +
                 '}';
     }
-
-
-
 }
