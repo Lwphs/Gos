@@ -13,6 +13,9 @@ public class Dog {
         this.weight = weight;
     }
 
+    public void bark() {
+        System.out.println(name + ": Woof woof!");
+    }
 
     @Override
     public String toString() {
