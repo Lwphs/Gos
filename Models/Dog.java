@@ -9,15 +9,15 @@ public class Dog {
     private int age;
     private int weight;
     private int energy;
-    private int hunger;
+    private int fullStomach;
     private int voice;
     private int happiness;
     private static final int MAX_ENERGY = 10;
-    private static final int MAX_HUNGER = 10;
+    private static final int MAX_FULL = 10;
     private static final int MAX_VOICE = 10;
     private static final int MAX_HAPPINESS = 10;
     private static final int MIN_ENERGY = 0;
-    private static final int MIN_HUNGER = 0;
+    private static final int MIN_FULL = 0;
     private static final int MIN_VOICE = 0;
     private static final int MIN_HAPPINESS = 0;
 
@@ -28,14 +28,14 @@ public class Dog {
         this.age = age;
         this.weight = weight;
         this.energy = MAX_ENERGY;
-        this.hunger = 0;
+        this.fullStomach = MAX_FULL;
         this.voice = MAX_VOICE;
         this.happiness = MAX_HAPPINESS / 2;
     }
 
     public Dog() {
         this.energy = MAX_ENERGY;
-        this.hunger = 0;
+        this.fullStomach = 0;
         this.voice = MAX_VOICE;
         this.happiness = MAX_HAPPINESS / 2;
     }
@@ -79,11 +79,17 @@ public class Dog {
     }
 
     public void eat() {
+
+        if (checkIfActionIsPossible(1)) {
+            System.out.println("Your dog cannot eat anymore!");
+            return;
+        }
+
         System.out.print("What will you give the dog to eat? ");
         String foodName = input.nextLine();
         System.out.println(name + " is eating " + foodName + ", it probably enjoys the meal.");
 
-        hunger -= 6;
+        fullStomach += 6;
         happiness += 2;
 
         checkStats();
@@ -91,6 +97,11 @@ public class Dog {
 
     public void sleep() throws InterruptedException {
         int sleepTime;
+
+        if (checkIfActionIsPossible(2)) {
+            System.out.println("Your dog cannot eat anymore!");
+            return;
+        }
 
         System.out.print("How many hours do you want your dog to sleep? ");
         sleepTime = input.nextInt();
@@ -107,16 +118,29 @@ public class Dog {
     }
 
     public void walkTheDog() {
+
+        if (checkIfActionIsPossible(3)) {
+            System.out.println("Your dog is too tired to walk");
+        }
+
         System.out.println("You walked the dog.");
 
         energy -= 2;
-        hunger += 4;
+        fullStomach -= 4;
         happiness++;
 
         checkStats();
     }
 
-    private static boolean checkIfActionIsPossible() {
+    public boolean checkIfActionIsPossible(int statToCheck) {
+        if (statToCheck == 1) {
+            return fullStomach >= MAX_FULL;
+        } else if (statToCheck == 2) {
+            return energy >= MAX_ENERGY;
+        } else if (statToCheck == 3) {
+            return energy <= MIN_ENERGY;
+        }
+        return false;
     }
 
     @Override
@@ -126,7 +150,7 @@ public class Dog {
                 ", age: " + age +
                 ", weight: " + weight +
                 ", energy: " + energy +
-                ", hunger: " + hunger +
+                ", hunger: " + fullStomach +
                 ", voice: " + voice +
                 ", happiness: " + happiness;
     }
@@ -170,12 +194,12 @@ public class Dog {
     }
 
     private void checkHunger() {
-        if (hunger >= MAX_HUNGER) {
-            hunger = MAX_HUNGER;
+        if (fullStomach <= MIN_FULL) {
+            fullStomach = MIN_FULL;
             happiness -= 2;
             System.out.println(name + " is hungry!");
 
-        } else if (hunger >= MIN_HUNGER) {
+        } else if (fullStomach >= MAX_FULL) {
             System.out.println("Your dog is full!");
             energy--;
         }
