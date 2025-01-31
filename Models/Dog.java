@@ -36,6 +36,8 @@ public class Dog {
         this.happiness = MAX_HAPPINESS / 2;
     }
 
+    public String getName() {return name;}
+
     public void setName(String name) {
         this.name = name;
     }
